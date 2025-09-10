@@ -39,132 +39,132 @@ export interface NavItem {
 export const mainItems: NavItem[] = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/dashboard",
     icon: Home,
     subitems: [
       {
         title: "Estoque",
-        url: "",
+        url: "/dashboard/stock",
         icon: Car,
       },
       {
         title: "Vendas do mês.",
-        url: "",
+        url: "/dashboard/sales",
         icon: DollarSign,
       },
       {
         title: "Top 3 vendedores",
-        url: "",
+        url: "/dashboard/sellers",
         icon: Dumbbell,
       },
     ],
   },
   {
     title: "Cadastro de Veículos",
-    url: "#",
+    url: "/vehicles",
     icon: ImagePlus,
     subitems: [
       {
         title: "Novo veículo",
-        url: "",
+        url: "/vehicles/new",
         icon: CirclePlus,
       },
       {
         title: "Lista de veículos",
-        url: "",
+        url: "/vehicles/list",
         icon: Binoculars,
       },
       {
         title: "Buscar veículos",
-        url: "",
+        url: "/vehicles/search",
         icon: SearchCheck,
       },
     ],
   },
   {
     title: "Gestão de Leads",
-    url: "#",
+    url: "/leads",
     icon: Headset,
     subitems: [
       {
         title: "Cadastro",
-        url: "",
+        url: "/leads/new",
         icon: CirclePlus,
       },
       {
         title: "Visualizar",
-        url: "",
+        url: "/leads/list",
         icon: Binoculars,
       },
       {
         title: "Buscar Leads",
-        url: "",
+        url: "/leads/search",
         icon: SearchCheck,
       },
     ],
   },
   {
     title: "Agenda de Test Drives",
-    url: "#",
+    url: "/test-drives",
     icon: CarFront,
     subitems: [
       {
         title: "Calendário",
-        url: "",
+        url: "/test-drives/calendar",
         icon: Calendar,
       },
       {
         title: "Agendamento",
-        url: "",
+        url: "/test-drives/schedule",
         icon: Calendar1Icon,
       },
       {
         title: "Notificação",
-        url: "",
+        url: "/test-drives/notifications",
         icon: Megaphone,
       },
     ],
   },
   {
     title: "Propostas e Vendas",
-    url: "#",
+    url: "/sales",
     icon: WalletMinimal,
     subitems: [
       {
         title: "Registros",
-        url: "",
+        url: "/sales/records",
         icon: HandHelping,
       },
       {
         title: "Propostas",
-        url: "",
+        url: "/sales/proposals",
         icon: TrendingUp,
       },
       {
         title: "Vendas",
-        url: "",
+        url: "/sales/sales",
         icon: Gavel,
       },
     ],
   },
   {
     title: "Relatórios",
-    url: "#",
+    url: "/reports",
     icon: ChartPie,
     subitems: [
       {
         title: "Vendedores",
-        url: "",
+        url: "/reports/sellers",
         icon: Percent,
       },
       {
         title: "Tempo médio",
-        url: "",
+        url: "/reports/average-time",
         icon: Hourglass,
       },
       {
         title: "Estoque por status",
-        url: "",
+        url: "/reports/stock-status",
         icon: Layers,
       },
     ],

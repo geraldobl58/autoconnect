@@ -13,7 +13,7 @@ import { useAuth } from "../hooks/use-auth";
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoggingIn, loginError } = useAuth();
+  const { login, isLoading, loginError } = useAuth();
 
   const {
     register,
@@ -43,7 +43,7 @@ export function LoginForm() {
             type="email"
             placeholder="seu@email.com"
             {...register("email")}
-            disabled={isLoggingIn}
+            disabled={isLoading}
             className={errors.email ? "border-red-500" : ""}
           />
           {errors.email && (
@@ -61,12 +61,12 @@ export function LoginForm() {
               type={showPassword ? "text" : "password"}
               placeholder="Sua senha"
               {...register("password")}
-              disabled={isLoggingIn}
+              disabled={isLoading}
               className={`pr-10 ${errors.password ? "border-red-500" : ""}`}
             />
             <button
               type="button"
-              disabled={isLoggingIn}
+              disabled={isLoading}
               onClick={togglePasswordVisibility}
               className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
               aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
@@ -87,8 +87,8 @@ export function LoginForm() {
           </div>
         )}
 
-        <Button type="submit" className="w-full" disabled={isLoggingIn}>
-          {isLoggingIn ? (
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? (
             <div className="flex items-center justify-center">
               <Loader2 className="animate-spin mr-2 h-4 w-4" />
               <span>Entrando...</span>
