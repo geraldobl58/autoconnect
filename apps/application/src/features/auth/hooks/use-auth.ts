@@ -2,37 +2,37 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+
 import { cookieUtils } from "@/lib/cookies";
-import { loginAction, getProfileAction } from "../actions/auth";
+
+import { loginAction } from "../actions/auth";
+import { authService } from "../services/auth.service";
 import { FormAuthValues } from "../schemas/auth";
 
 export const useAuth = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const hasToken = cookieUtils.hasToken();
-
-  // Query para buscar o perfil do usuário - só executa se tiver token
-  const {
-    data: user,
-    isLoading: isLoadingUser,
-    error: userError,
-  } = useQuery({
-    queryKey: ["auth", "profile"],
+  // Query para buscar o perfil do usuário
+  const { data: user, isLoading: isLoadingUser } = useQuery({
+    queryKey: ["user"],
     queryFn: async () => {
-      if (!hasToken) {
-        throw new Error("Não há token disponível");
+      try {
+        const userData = await authService.getProfile();
+        return userData;
+      } catch (error) {
+        // Se erro 401, remover token
+        if (error && typeof error === "object" && "response" in error) {
+          const axiosError = error as { response?: { status?: number } };
+          if (axiosError.response?.status === 401) {
+            cookieUtils.removeToken();
+          }
+        }
+
+        throw error; // Re-throw para que o React Query trate como erro
       }
-
-      const result = await getProfileAction();
-
-      if (!result.success) {
-        throw new Error(result.error);
-      }
-
-      return result.data;
     },
-    enabled: hasToken, // Só busca se tiver token
+    enabled: cookieUtils.hasToken(),
     retry: false,
     staleTime: 5 * 60 * 1000, // 5 minutos
   });
@@ -41,28 +41,15 @@ export const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: async (credentials: FormAuthValues) => {
       const result = await loginAction(credentials);
-
       if (!result.success) {
         throw new Error(result.error || "Erro no login");
       }
-
       return result.data!;
     },
     onSuccess: (data) => {
-      // Salvar token no cookie
       cookieUtils.setToken(data.access_token);
-
-      // Invalidar queries relacionadas a auth
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-
-      console.log("Login realizado com sucesso!");
-
-      // Redirecionar para dashboard
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       router.push("/dashboard");
-    },
-    onError: (error) => {
-      console.error("Erro no login:", error);
-      console.error("Erro ao fazer login:", error.message);
     },
   });
 
@@ -70,27 +57,15 @@ export const useAuth = () => {
   const logout = () => {
     cookieUtils.removeToken();
     queryClient.clear();
-    console.log("Logout realizado com sucesso!");
     router.push("/");
   };
 
-  // Estados derivados
-  const isAuthenticated = hasToken && !userError && user !== undefined;
-  const isLoading = loginMutation.isPending || isLoadingUser;
-
   return {
-    // Dados do usuário
     user,
-    isAuthenticated,
-    isLoading,
-    isLoadingUser,
-
-    // Funções de autenticação
+    isAuthenticated: !!user,
+    isLoading: isLoadingUser || loginMutation.isPending,
     login: loginMutation.mutate,
     logout,
-
-    // Estados das mutations
-    isLoggingIn: loginMutation.isPending,
     loginError: loginMutation.error?.message,
   };
 };

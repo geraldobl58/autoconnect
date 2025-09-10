@@ -60,10 +60,34 @@ export async function getProfileAction() {
       data: user,
     };
   } catch (error: unknown) {
-    console.error("Erro ao buscar perfil:", error);
+    if (error && typeof error === "object" && "response" in error) {
+      const axiosError = error as {
+        response?: { status?: number; data?: unknown };
+      };
+
+      if (axiosError.response?.status === 401) {
+        return {
+          success: false,
+          error: "Token inválido ou expirado",
+        };
+      }
+
+      if (axiosError.response?.status === 404) {
+        return {
+          success: false,
+          error: "Usuário não encontrado",
+        };
+      }
+
+      return {
+        success: false,
+        error: `Erro do servidor: ${axiosError.response?.status || "Desconhecido"}`,
+      };
+    }
+
     return {
       success: false,
-      error: "Erro ao carregar perfil do usuário",
+      error: "Erro ao conectar com o servidor",
     };
   }
 }
