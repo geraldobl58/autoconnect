@@ -28,17 +28,49 @@ export const AppSidebarLinks = () => {
   const pathname = usePathname();
 
   const isActive = (url: string): boolean => {
-    if (url === "/") return pathname === "/dashboard" || pathname === "/";
-    return pathname === url || pathname.startsWith(url);
+    // Ignora URLs que são apenas "#" (placeholders)
+    if (url === "#" || !url) return false;
+
+    // Remove trailing slash se existir
+    const normalizedUrl =
+      url.endsWith("/") && url !== "/" ? url.slice(0, -1) : url;
+    const normalizedPathname =
+      pathname.endsWith("/") && pathname !== "/"
+        ? pathname.slice(0, -1)
+        : pathname;
+
+    // Casos especiais para rotas raiz
+    if (normalizedUrl === "/" || normalizedUrl === "/dashboard") {
+      return (
+        normalizedPathname === "/" ||
+        normalizedPathname === "/dashboard" ||
+        pathname.startsWith("/dashboard/")
+      );
+    }
+
+    // Para outras rotas, verifica correspondência exata ou sub-caminhos
+    if (normalizedPathname === normalizedUrl) return true;
+
+    // Verifica se é um sub-caminho válido (deve ter "/" após o URL base)
+    return (
+      pathname.startsWith(normalizedUrl + "/") ||
+      pathname.startsWith(normalizedUrl + "?")
+    );
   };
 
   const hasActiveSubitem = (subitems?: NavItem["subitems"]): boolean => {
     if (!subitems) return false;
-    return subitems.some((subitem) => isActive(subitem.url));
+    return subitems.some((subitem) => {
+      // Verifica se algum subitem está ativo
+      return isActive(subitem.url);
+    });
   };
 
   const getNavItemClasses = (item: NavItem) => {
-    const active = isActive(item.url) || hasActiveSubitem(item.subitems);
+    // Verifica se o item atual está ativo ou se algum subitem está ativo
+    const isItemActive = isActive(item.url);
+    const hasActiveChild = hasActiveSubitem(item.subitems);
+    const active = isItemActive || hasActiveChild;
 
     return {
       linkClasses: [

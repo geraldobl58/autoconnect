@@ -39,7 +39,7 @@ export interface NavItem {
 export const mainItems: NavItem[] = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/dashboard",
     icon: Home,
     subitems: [
       {
@@ -76,7 +76,7 @@ export const mainItems: NavItem[] = [
       },
       {
         title: "Lista de veículos",
-        url: "/vehicles/list",
+        url: "/vehicles/",
         icon: Binoculars,
       },
       {

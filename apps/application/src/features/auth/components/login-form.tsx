@@ -35,7 +35,7 @@ export function LoginForm() {
     <div className="w-full max-w-md mx-auto p-6">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
+          <label htmlFor="email" className="block text-xs font-medium mb-1">
             Email
           </label>
           <Input
@@ -47,12 +47,12 @@ export function LoginForm() {
             className={errors.email ? "border-red-500" : ""}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
           )}
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-1">
+          <label htmlFor="password" className="block text-xs font-medium mb-1">
             Senha
           </label>
           <div className="relative">
@@ -75,7 +75,7 @@ export function LoginForm() {
             </button>
           </div>
           {errors.password && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-500 text-xs mt-1">
               {errors.password.message}
             </p>
           )}
