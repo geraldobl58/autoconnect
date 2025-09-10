@@ -116,7 +116,7 @@ export const AppSidebarLinks = () => {
 
   return (
     <SidebarGroup>
-      <div className="mb-4 flex items-center border-b pb-4">
+      <div className="mb-4 flex items-center border-b pb-6">
         <Logo />
       </div>
       <SidebarGroupLabel>Dashboard</SidebarGroupLabel>

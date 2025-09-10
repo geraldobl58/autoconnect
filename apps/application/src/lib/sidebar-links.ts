@@ -39,12 +39,17 @@ export interface NavItem {
 export const mainItems: NavItem[] = [
   {
     title: "Dashboard",
-    url: "/dashboard",
+    url: "#",
     icon: Home,
     subitems: [
       {
+        title: "Inicio",
+        url: "/dashboard",
+        icon: Home,
+      },
+      {
         title: "Estoque",
-        url: "/dashboard/stock",
+        url: "/stock",
         icon: Car,
       },
       {
