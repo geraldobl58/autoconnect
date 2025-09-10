@@ -1,23 +1,20 @@
 import Cookies from "js-cookie";
 
-const TOKEN_KEY = "access_token";
-const TOKEN_EXPIRES = 1;
-
 export const cookieUtils = {
   setToken(token: string) {
-    Cookies.set(TOKEN_KEY, token, {
-      expires: TOKEN_EXPIRES,
+    Cookies.set(process.env.TOKEN_KEY!, token, {
+      expires: Number(process.env.TOKEN_EXPIRES!),
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
     });
   },
 
   getToken(): string | undefined {
-    return Cookies.get(TOKEN_KEY);
+    return Cookies.get(process.env.TOKEN_KEY!);
   },
 
   removeToken() {
-    Cookies.remove(TOKEN_KEY);
+    Cookies.remove(process.env.TOKEN_KEY!);
   },
 
   hasToken(): boolean {
