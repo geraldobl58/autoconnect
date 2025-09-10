@@ -1,7 +1,7 @@
 "use client";
 
 import { Logo } from "@/components/logo";
-import { AuthForm } from "@/features/auth/components/auth";
+import { LoginForm } from "@/features/auth/components/login-form";
 
 const AuthPage = () => {
   return (
@@ -10,7 +10,7 @@ const AuthPage = () => {
         <Logo />
         <h3 className="text-md font-extrabold text-primary">Autoconnect</h3>
         <div className="w-full mt-8">
-          <AuthForm />
+          <LoginForm />
         </div>
       </div>
     </div>
