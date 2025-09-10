@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 import { ChevronDown } from "lucide-react";
 
@@ -23,6 +22,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useNavigation } from "@/hooks/use-navigation";
 import { mainItems, NavItem } from "@/lib/sidebar-links";
+import { Logo } from "./logo";
 
 export const AppSidebarLinks = () => {
   const { getNavItemClasses } = useNavigation();
@@ -77,14 +77,7 @@ export const AppSidebarLinks = () => {
   return (
     <SidebarGroup>
       <div className="mb-4 flex items-center border-b pb-4">
-        <Link passHref href="/">
-          <Image
-            src="/assets/images/logo.svg"
-            alt="Auto Connect"
-            width={30}
-            height={30}
-          />
-        </Link>
+        <Logo />
       </div>
       <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
       <SidebarGroupContent>
