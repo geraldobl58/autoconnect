@@ -15,11 +15,6 @@ export async function loginAction(
   credentials: FormAuthValues
 ): Promise<LoginResult> {
   try {
-    console.log("Tentando autenticar usuário:", {
-      email: credentials.email,
-      // Não logar a senha por segurança
-    });
-
     const response = await authService.login(credentials);
 
     return {
@@ -31,7 +26,6 @@ export async function loginAction(
   } catch (error: unknown) {
     console.error("Erro no login:", error);
 
-    // Tratar diferentes tipos de erro
     if (error && typeof error === "object" && "response" in error) {
       const axiosError = error as { response?: { status?: number } };
 
@@ -59,9 +53,8 @@ export async function loginAction(
 
 export async function getProfileAction() {
   try {
-    console.log("getProfileAction: Chamando authService.getProfile()");
     const user = await authService.getProfile();
-    console.log("getProfileAction: Usuário retornado:", user);
+
     return {
       success: true,
       data: user,

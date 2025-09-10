@@ -2,7 +2,6 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-// import { toast } from "sonner"; // Comentado por enquanto
 import { cookieUtils } from "@/lib/cookies";
 import { loginAction, getProfileAction } from "../actions/auth";
 import { FormAuthValues } from "../schemas/auth";
@@ -12,11 +11,6 @@ export const useAuth = () => {
   const queryClient = useQueryClient();
 
   const hasToken = cookieUtils.hasToken();
-
-  console.log("useAuth Debug:", {
-    hasToken,
-    token: cookieUtils.getToken(),
-  });
 
   // Query para buscar o perfil do usuário - só executa se tiver token
   const {
@@ -29,12 +23,13 @@ export const useAuth = () => {
       if (!hasToken) {
         throw new Error("Não há token disponível");
       }
-      console.log("Executando getProfileAction...");
+
       const result = await getProfileAction();
-      console.log("getProfileAction result:", result);
+
       if (!result.success) {
         throw new Error(result.error);
       }
+
       return result.data;
     },
     enabled: hasToken, // Só busca se tiver token
@@ -80,20 +75,12 @@ export const useAuth = () => {
     cookieUtils.removeToken();
     queryClient.clear();
     console.log("Logout realizado com sucesso!");
-    router.push("/login");
+    router.push("/");
   };
 
   // Estados derivados
   const isAuthenticated = hasToken && !userError && user !== undefined;
   const isLoading = loginMutation.isPending || isLoadingUser;
-
-  console.log("Estados derivados:", {
-    hasToken,
-    userError: !!userError,
-    userExists: !!user,
-    isAuthenticated,
-    isLoading,
-  });
 
   return {
     // Dados do usuário

@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 const TOKEN_KEY = "access_token";
-const TOKEN_EXPIRES = 7; // 7 dias
+const TOKEN_EXPIRES = 1;
 
 export const cookieUtils = {
   setToken(token: string) {

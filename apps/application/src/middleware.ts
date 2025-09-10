@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
   const protectedRoutes = ["/dashboard"];
 
   // Rotas de autenticação (login)
-  const authRoutes = ["/login", "/"];
+  const authRoutes = ["/", "/"];
 
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
 
   // Se está tentando acessar rota protegida sem token
   if (isProtectedRoute && !hasToken) {
-    const loginUrl = new URL("/login", request.url);
+    const loginUrl = new URL("/", request.url);
     return NextResponse.redirect(loginUrl);
   }
 
