@@ -49,15 +49,11 @@ export const useAuth = () => {
       return result.data!;
     },
     onSuccess: (data) => {
-      console.log("Login success - dados recebidos:", data);
-
       // Salvar token no cookie
       cookieUtils.setToken(data.access_token);
-      console.log("Token salvo no cookie:", cookieUtils.getToken());
 
       // Invalidar queries relacionadas a auth
       queryClient.invalidateQueries({ queryKey: ["auth"] });
-      console.log("Queries invalidadas");
 
       console.log("Login realizado com sucesso!");
 
