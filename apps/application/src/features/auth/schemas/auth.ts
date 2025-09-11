@@ -10,9 +10,6 @@ export const formAuthSchema = z.object({
     .min(6, {
       message: "A senha deve ter no mínimo 6 caracteres.",
     })
-    .max(8, {
-      message: "A senha deve ter no máximo 8 caracteres.",
-    })
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/, {
       message:
         "A senha deve conter ao menos: 1 maiúscula, 1 minúscula, 1 número e 1 símbolo.",

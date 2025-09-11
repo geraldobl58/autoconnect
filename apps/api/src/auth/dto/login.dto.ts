@@ -13,8 +13,20 @@ export class LoginDto {
 
   @IsString()
   @MinLength(6)
-  @MaxLength(8)
-  @IsStrongPassword()
-  @ApiProperty({ example: 'Jo@Jo22#' })
+  @MaxLength(20)
+  @IsStrongPassword({
+    minLength: 6,
+    minLowercase: 1,
+    minUppercase: 1,
+    minNumbers: 1,
+    minSymbols: 1,
+  })
+  @ApiProperty({
+    example: 'MyPass123!',
+    description:
+      'Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 symbol. Length: 6-20 chars.',
+    minLength: 6,
+    maxLength: 20,
+  })
   password: string;
 }

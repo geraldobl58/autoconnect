@@ -47,7 +47,7 @@ export function LoginForm() {
             className={errors.email ? "border-red-500" : ""}
           />
           {errors.email && (
-            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+            <p className="text-red-700 text-xs mt-1">{errors.email.message}</p>
           )}
         </div>
 
@@ -75,14 +75,14 @@ export function LoginForm() {
             </button>
           </div>
           {errors.password && (
-            <p className="text-red-500 text-xs mt-1">
+            <p className="text-red-700 text-xs mt-1">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {loginError && (
-          <div className="p-3 text-red-700 bg-red-100 rounded-md">
+          <div className="p-3 text-xs text-red-700 bg-red-100 rounded-md">
             {loginError}
           </div>
         )}
