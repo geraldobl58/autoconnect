@@ -53,7 +53,7 @@ export const mainItems: NavItem[] = [
         icon: Car,
       },
       {
-        title: "Vendas do mês.",
+        title: "Vendas do mês",
         url: "/dashboard/sales",
         icon: DollarSign,
       },
@@ -65,24 +65,14 @@ export const mainItems: NavItem[] = [
     ],
   },
   {
-    title: "Cadastro de Veículos",
+    title: "Veículos",
     url: "/vehicles",
     icon: ImagePlus,
     subitems: [
       {
-        title: "Novo veículo",
-        url: "/vehicles/new",
-        icon: CirclePlus,
-      },
-      {
-        title: "Lista de veículos",
+        title: "Administração",
         url: "/vehicles/",
         icon: Binoculars,
-      },
-      {
-        title: "Buscar veículos",
-        url: "/vehicles/search",
-        icon: SearchCheck,
       },
     ],
   },

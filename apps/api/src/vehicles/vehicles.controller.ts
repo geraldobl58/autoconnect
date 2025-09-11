@@ -64,7 +64,6 @@ export class VehiclesController {
             updatedAt: { type: 'string', format: 'date-time' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -144,7 +143,6 @@ export class VehiclesController {
             hasPrevPage: { type: 'boolean' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -190,7 +188,6 @@ export class VehiclesController {
             updatedAt: { type: 'string', format: 'date-time' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -241,7 +238,6 @@ export class VehiclesController {
             updatedAt: { type: 'string', format: 'date-time' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -303,7 +299,6 @@ export class VehiclesController {
             updatedAt: { type: 'string', format: 'date-time' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -351,7 +346,6 @@ export class VehiclesController {
             vehicleId: { type: 'string' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -390,7 +384,6 @@ export class VehiclesController {
             },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
@@ -430,7 +423,6 @@ export class VehiclesController {
             vehicleId: { type: 'string' },
           },
         },
-        message: { type: 'string' },
       },
     },
   })
